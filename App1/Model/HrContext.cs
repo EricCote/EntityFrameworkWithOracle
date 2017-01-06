@@ -1,4 +1,4 @@
-namespace WebApplication1.Models
+namespace App1.Models
 {
     using System;
     using System.Data.Entity;
@@ -10,6 +10,7 @@ namespace WebApplication1.Models
         public HrContext()
             : base("name=Hr")
         {
+    
         }
 
         public virtual DbSet<Country> Countries { get; set; }
@@ -22,6 +23,8 @@ namespace WebApplication1.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.HasDefaultSchema("HR");
+
             modelBuilder.Entity<Country>()
                 .Property(e => e.CountryId)
                 .IsFixedLength()
@@ -45,19 +48,24 @@ namespace WebApplication1.Models
                 .HasForeignKey(e => e.DepartmentId);
 
             modelBuilder.Entity<Employee>()
-                .Property(e => e.FirstName)
+                .Property(e => e.Prenom)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
-                .Property(e => e.LastNAme)
+                .Property(e => e.LastName)
+                .IsUnicode(false);
+
+
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.Initiales)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
-                .Property(e => e.Email)
+                .Property(e => e.Contact.Email)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
-                .Property(e => e.PhoneNumber)
+                .Property(e => e.Contact.PhoneNumber)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
@@ -137,6 +145,8 @@ namespace WebApplication1.Models
             modelBuilder.Entity<Region>()
                 .Property(e => e.RegionName)
                 .IsUnicode(false);
+
+
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace WebApplication1.Models
+namespace App1.Models
 {
     using System;
     using System.Collections.Generic;
@@ -24,21 +24,30 @@ namespace WebApplication1.Models
 
         [StringLength(20)]
         [Column("FIRST_NAME")]
-        public string FirstName { get; set; }
+        public string Prenom { get; set; }
+
+        [StringLength(3)]
+        [Column("INITIALES")]
+        public string Initiales { get; set; }
+
+        [StringLength(3)]
+        [Column("TEST")]
+        public string test { get; set; }
+
 
         [Required]
         [StringLength(25)]
         [Column("LAST_NAME")]
-        public string LastNAme { get; set; }
+        public string LastName { get; set; }
 
-        [Required]
-        [StringLength(25)]
-        [Column("EMAIL")]
-        public string Email { get; set; }
+        public Contact Contact { get; set; }
 
-        [StringLength(20)]
-        [Column("PHONE_NUMBER")]
-        public string PhoneNumber { get; set; }
+        //provoque du traffic en Lazy loading!
+        //[NotMapped()]
+        //public string DepartmentName {
+        //    get { return Department.DepartmentName;
+        //    }
+        //}
 
         [Column("HIRE_DATE")]
         public DateTime HireDate { get; set; }
